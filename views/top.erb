@@ -1,2 +1,15 @@
-  "Hello world!/n"<br>
-  'this page is TOP!'
+<ul>
+    <% @memos.each_with_index do |memo, index| %>
+      <li id= "<%= memo['id'] %>">
+          <a href="/memo/<%= memo['id'] %>">
+            <%= memo['title'] %>  
+          </a>
+      </li>
+    <% end %>
+</ul>
+
+<div>
+    <button>
+      <a href="/new">作成</a>
+    </button>
+</div>

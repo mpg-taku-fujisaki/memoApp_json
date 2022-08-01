@@ -2,10 +2,17 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'json'
 
+# ------------------ read JSON --------------------
+json_file_path = 'data.json'
+json_data = open(json_file_path) do |io|
+  JSON.load(io)
+end
+memos = json_data['memos']
+# -------------------------------------------------
+
 get '/' do
-  content_type :json
-  data = { foo: "bar" }
-  data.to_json
+  @memos = memos
+  erb :top
 end
 
 get '/top' do
