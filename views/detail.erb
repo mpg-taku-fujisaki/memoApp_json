@@ -10,7 +10,8 @@
       <a href="/memos/<%= @memo['id'] %>/edit">編集</a>
     </button>
 
-    <button>
-      <a href="/delete">削除</a>
-    </button>
+    <form class="button" method="post" action="/memos/<%= @memo['id'] %>/delete">
+		  <input type="hidden" name="_method" value="DELETE">
+		  <input type="submit" value="削除">
+	  </form>
 </div>

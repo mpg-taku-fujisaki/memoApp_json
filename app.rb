@@ -17,22 +17,17 @@ def find_memo(dist_id)
   return dist_memo
 end
 
-
-
-
 # top
 get '/memos' do
   @memos = $memos
   erb :top
 end
 
-
 # detail
 get '/memos/:id/detail' do
   @memo = find_memo(params[:id])
   erb :detail
 end
-
 
 # new
 get '/memos/new' do
@@ -50,15 +45,12 @@ post '/memos/new' do
   else
     next_id = all_id.max + 1
   end
-    
-  
   # make new json-data
   new_data = {
     "id" => next_id.to_s, 
     "title" => params[:title], 
     "content" => params[:content]
   }
-
   # add data to json-file
   $json_data['memos'].push(new_data)
   
@@ -71,14 +63,12 @@ get '/memos/:id/edit' do
   erb :edit
 end
 
-
 patch '/memos/:id/edit' do
   new_memo = {
     "id" => params[:id].to_s, 
     "title" => params[:title], 
     "content" => params[:content]
   }
-  
   # edit json-data for update
   $memos.each_with_index do |memo, index|
     if memo['id'].to_s == params[:id].to_s then
@@ -87,13 +77,26 @@ patch '/memos/:id/edit' do
       break
     end 
   end
-
   # rewrite
   File.open("data.json", 'w') do |file|
     JSON.dump($json_data, file)
   end
   
-  @test1 = $json_data
-  
+  redirect '/memos'
+end
+
+# delete
+delete '/memos/:id/delete' do
+  $memos.each_with_index do |memo, index|
+    if memo['id'].to_s == params[:id].to_s then
+      $json_data["memos"].delete_at(index)
+      break
+    end 
+  end
+  # rewrite
+  File.open("data.json", 'w') do |file|
+    JSON.dump($json_data, file)
+  end
+
   redirect '/memos'
 end
