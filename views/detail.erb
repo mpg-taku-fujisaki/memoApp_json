@@ -1,25 +1,16 @@
-
-      
-<a href="/memos/<%= @memo['id'] %>">
+<div>
   <%= @memo['title'] %>
-</a>
+</div>
 <div>
   <%= @memo['content'] %>
 </div>
-
-      
-
-
+   
 <div>
     <button>
-      <a href="/edit">編集</a>
+      <a href="/memos/<%= @memo['id'] %>/edit">編集</a>
     </button>
 
     <button>
       <a href="/delete">削除</a>
     </button>
-</div>
-
-<div>
-    
 </div>

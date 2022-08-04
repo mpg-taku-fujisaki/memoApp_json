@@ -27,12 +27,10 @@ get '/memos' do
 end
 
 
-# show
-get '/memos/:id/show' do
-  # make memos method!!!!!!!
-  
+# detail
+get '/memos/:id/detail' do
   @memo = find_memo(params[:id])
-  erb :show
+  erb :detail
 end
 
 
@@ -47,7 +45,12 @@ post '/memos/new' do
   $memos.each do |memo|
     all_id.push(memo['id'].to_i)
   end
-  next_id = all_id.max + 1
+  if all_id.empty?
+    next_id = 1
+  else
+    next_id = all_id.max + 1
+  end
+    
   
   # make new json-data
   new_data = {
@@ -58,6 +61,39 @@ post '/memos/new' do
 
   # add data to json-file
   $json_data['memos'].push(new_data)
+  
+  redirect '/memos'
+end
+
+# edit
+get '/memos/:id/edit' do
+  @memo = find_memo(params[:id])
+  erb :edit
+end
+
+
+patch '/memos/:id/edit' do
+  new_memo = {
+    "id" => params[:id].to_s, 
+    "title" => params[:title], 
+    "content" => params[:content]
+  }
+  
+  # edit json-data for update
+  $memos.each_with_index do |memo, index|
+    if memo['id'].to_s == params[:id].to_s then
+      $json_data["memos"][index]["title"] = new_memo["title"]
+      $json_data["memos"][index]["content"] = new_memo["content"]
+      break
+    end 
+  end
+
+  # rewrite
+  File.open("data.json", 'w') do |file|
+    JSON.dump($json_data, file)
+  end
+  
+  @test1 = $json_data
   
   redirect '/memos'
 end
