@@ -56,15 +56,8 @@ post '/memos/new' do
     "content" => params[:content]
   }
 
-
-  test1 = $json_data, Time.now()
-  @test1 = test1
-
   # add data to json-file
   $json_data['memos'].push(new_data)
   
-  @test2 = $json_data
-
-
-  erb :test
+  redirect '/memos'
 end
