@@ -10,3 +10,6 @@ gem "sinatra-contrib"
 gem "webrick"
 gem "json"
 
+group :development do
+  gem 'rubocop-fjord', require: false
+end
