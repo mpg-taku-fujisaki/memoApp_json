@@ -9,6 +9,7 @@ dev memoApp with json file
 
 
 # 要件チェック項目
+
 ✅PRGパターンで実装されていること
 ✅RESTに倣ったURIになっていること
 ✅レビュアーが、ローカルでアプリケーションを立ち上げるための手順書がREADMEに記載されていること
@@ -16,5 +17,5 @@ dev memoApp with json file
 ✅ファイルに保存されていること（DBを使わないこと）
 ✅追加はPOSTメソッド、編集はPATCHメソッド、削除はDELETEメソッドで実装すること
 XSS対策できていること
-rubocop-fjordのルールでのrubocopを通過していること
+✅rubocop-fjordのルールでのrubocopを通過していること
 ERB LInt のチェックをパスできていること
