@@ -24,7 +24,7 @@ dev memoApp with json file
 
 ✅追加はPOSTメソッド、編集はPATCHメソッド、削除はDELETEメソッドで実装すること
 
-XSS対策できていること
+✅XSS対策できていること
 
 ✅rubocop-fjordのルールでのrubocopを通過していること
 
