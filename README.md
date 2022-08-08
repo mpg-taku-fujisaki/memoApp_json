@@ -28,4 +28,4 @@ dev memoApp with json file
 
 ✅rubocop-fjordのルールでのrubocopを通過していること
 
-ERB LInt のチェックをパスできていること
+✅ERB LInt のチェックをパスできていること
