@@ -1,7 +1,7 @@
-# memoApp_json
+# what is it
 dev memoApp with json file
 
-#立ち上げ方法
+# 立ち上げ方法
 
 ローカルにダウンロード後、ルートディレクトリで、以下のコマンドを実行
 
