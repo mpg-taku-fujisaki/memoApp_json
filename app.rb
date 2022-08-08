@@ -8,7 +8,7 @@ $json_data = open(json_file_path) do |io|
   JSON.load(io)
 end
 $memos = $json_data['memos']
-# -------------------------------------------------
+# ------------------- method ----------------------
 def find_memo(dist_id)
   dist_memo = ""
   $memos.each do |memo|
@@ -17,6 +17,14 @@ def find_memo(dist_id)
   return dist_memo
 end
 
+helpers do
+  def h(text)
+    Rack::Utils.escape_html(text)
+  end
+end
+# "#{h(params[:name])}"
+
+# -------------------- main -----------------------
 # top
 get '/memos' do
   @memos = $memos
@@ -48,8 +56,8 @@ post '/memos/new' do
   # make new json-data
   new_data = {
     "id" => next_id.to_s, 
-    "title" => params[:title], 
-    "content" => params[:content]
+    "title" => h(params[:title]), 
+    "content" => h(params[:content])
   }
   # add data to json-file
   $json_data['memos'].push(new_data)
@@ -66,8 +74,8 @@ end
 patch '/memos/:id/edit' do
   new_memo = {
     "id" => params[:id].to_s, 
-    "title" => params[:title], 
-    "content" => params[:content]
+    "title" => h(params[:title]), 
+    "content" => h(params[:content])
   }
   # edit json-data for update
   $memos.each_with_index do |memo, index|
